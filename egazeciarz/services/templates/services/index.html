@@ -1,0 +1,9 @@
+{% if services_list %}
+    <ul>
+        {% for service in services_list %}
+            <li><a href="/services/{{ service.id }}/">{{ service.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    Nie ma serwisuf. :(
+{% endif %}
