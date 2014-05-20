@@ -1,3 +1,4 @@
 *.pyc
 egazeciarz/db.sqlite3
 .*.swp
+egazeciarz/.idea/
