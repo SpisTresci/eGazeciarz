@@ -11,7 +11,13 @@ def index(request):
 
 def detail(request, service_id):
     service = get_object_or_404(Service, id=service_id)
-    return render(request, 'services/detail.html', {'service': service, 'checkbox': not service.status or "checked"})
+    return render(
+        request,
+        'services/detail.html',
+        {
+            'service': service,
+            'checkbox': not service.status or 'checked'
+        })
 
 
 def save(request, service_id):
