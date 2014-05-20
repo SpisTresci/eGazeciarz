@@ -1,6 +1,6 @@
 <h1> {{ service.name }} </h1>
 <form action="{% url 'services:save' service.id %}" method="post">
 {% csrf_token %}
-    <input type="checkbox" name="test" id="{{ user.id }}" value="{{ user.day }}"/>
-<input type="submit" value"Zapisuj">
+    <input type="checkbox" name="status" {{ checkbox }} value="{{ checkbox }}"/>
+<input type="submit" value="Zapisuj">
 </form>
