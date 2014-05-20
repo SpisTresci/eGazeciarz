@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 
 from services.models import Service
 
@@ -8,9 +9,8 @@ def index(request):
     return render(request, 'services/index.html', context)
 
 def detail(request, service_id):
-    try:
-        service = Service.objects.get(id=service_id)
-    except Service.DoesNotExist:
-        raise Http404
+    service = get_object_or_404(Service, id=service_id)
     return render(request, 'services/detail.html', {'service': service})
 
+def save(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
