@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+import subprocess
+import re
+import sys
+
+commit_message = open(sys.argv[1], 'r').read()
+if re.search(r'^(WIP|WorkInProgress)', commit_message):
+    sys.exit(0)
+
+files = subprocess.Popen(['git', 'status', '--porcelain'],
+                         stdout=subprocess.PIPE).communicate()[0]
+if not re.findall(r'(.+)\ (.+)\.py\n', files, re.MULTILINE):
+    sys.exit(0)
+files = re.findall(r'[A|M]\ {2}(.+)\.py\n', files, re.MULTILINE)
+if not files:
+    print """Error: pre-commit hook didn't find any files to commit.\n""" + \
+          """Maybe you used 'git add file', and then modified this file?"""
+    sys.exit(1)
+
+pep8_check = subprocess.Popen(['pep8'] + files,
+                              stdout=subprocess.PIPE).communicate()[0]
+if pep8_check != '':
+    print pep8_check + 'Error: pre-commit hook found some PEP8 errors above!'
+    sys.exit(1)
