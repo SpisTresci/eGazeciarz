@@ -3,6 +3,13 @@ import subprocess
 import re
 import sys
 
+pep8_installed = subprocess.Popen(['pip', 'show', 'pep8'],
+                                  stdout=subprocess.PIPE).communicate()[0]
+if pep8_installed == '':
+    print """Error: pep8 isn't installed.\n""" + \
+          """You can install this and other requirements by 'pip install -r requirements.txt' command."""
+    sys.exit(1)
+
 commit_message = open(sys.argv[1], 'r').read()
 if re.search(r'^(WIP|WorkInProgress)', commit_message):
     sys.exit(0)
