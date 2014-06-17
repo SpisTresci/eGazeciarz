@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}eGazeciarz{% endblock title %}</title>
+
+    <!-- CSS -->
+    {% if is_dev %}
+        <link href="{% static "css/bootstrap-3.0.css"%}" rel="stylesheet" media="screen">
+        <link href="{% static "css/bootstrap-responsive-3.0.css"%}" rel="stylesheet" media="screen">
+    {% else %}
+        <link href="{% static "css/bootstrap-min-3.0.css"%}" rel="stylesheet" media="screen">
+        <link href="{% static "css/bootstrap-responsive-min-3.0.css"%}" rel="stylesheet" media="screen">
+    {% endif %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
+    {% block css %}{% endblock css %}
+
+    <!-- JavaScript -->
+    {% if is_dev %}
+        <script src="{% static "js/jquery-1.10.2.js" %}"</script>
+        <script src="{% static "js/bootstrap-3.0.js" %}"</script>
+    {% else %}
+        <script src="{% static "js/jquery-min-1.10.2.js" %}"</script>
+        <script src="{% static "js/bootstrap-min-3.0.js" %}"</script>
+    {% endif %}
+    {% block js %} {% endblock js %}
+
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" />
+    <meta name="description" content="eGazeciarz to projekt, który pozwala Ci w łatwy sposób zasubskrybować interesujące Cię treści wprost na Twój czytnik." />
+
+  </head>
+  <body>
+    {% block body %}{% endblock body %}
+  </body>
+</html>
+
