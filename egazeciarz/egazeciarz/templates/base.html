@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html>
   <head>
     <meta charset="utf-8">
@@ -25,7 +26,7 @@
         <script src="{% static "js/jquery-min-1.10.2.js" %}"</script>
         <script src="{% static "js/bootstrap-min-3.0.js" %}"</script>
     {% endif %}
-    {% block js %} {% endblock js %}
+    {% block js %}{% endblock js %}
 
   </head>
   <body>
