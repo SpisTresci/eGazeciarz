@@ -1,7 +1,5 @@
-*.pyc
 egazeciarz/db.sqlite3
 .*.swp
-egazeciarz/.idea/
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
