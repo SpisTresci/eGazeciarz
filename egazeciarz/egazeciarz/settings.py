@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
     'services',
 )
 
@@ -52,6 +53,7 @@ ROOT_URLCONF = 'egazeciarz.urls'
 
 WSGI_APPLICATION = 'egazeciarz.wsgi.application'
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
