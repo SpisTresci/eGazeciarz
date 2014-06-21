@@ -13,5 +13,11 @@
   ],
 
   "unit.engine": "DjangoUnitTestEngine",
-  "unit.engine.manage_py_dir": "egazeciarz"
+  "unit.engine.manage_py_dir": "egazeciarz",
+
+  "aliases" : {
+    "new-feature" : [
+      "!git fetch origin;arc feature"
+    ]
+  }
 }
