@@ -5,7 +5,7 @@
 
   "base": "git:merge-base(origin/dev), arc:upstream, git:HEAD^",
   "arc.land.onto.default" : "dev",
-  "arc.feature.start.default" : "dev",
+  "arc.feature.start.default" : "origin/dev",
   "arc.land.update.default" : "rebase",
 
   "load" : [
