@@ -38,11 +38,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
+    'egazeciarz',
+    'services',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'django_nose',
-    'services',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,7 +90,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 # Django allauth section
 
 SITE_ID = 1  # IMPORTANT! After installation change example.com in /admin panel
@@ -124,3 +124,13 @@ SOCIALACCOUNT_PROVIDERS = {
 # temporary email backend for registration
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Template files
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(BASE_DIR), "static", "templates")
+)
+
+STATIC_ROOT = os.path.join(
+    os.path.dirname(BASE_DIR),
+    "static",
+    "collected_statics")
