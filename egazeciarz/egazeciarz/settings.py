@@ -132,5 +132,6 @@ TEMPLATE_DIRS = (
 
 STATIC_ROOT = os.path.join(
     os.path.dirname(BASE_DIR),
-    "static",
-    "collected_statics")
+    "egazeciarz",
+    "collected_statics",
+)
