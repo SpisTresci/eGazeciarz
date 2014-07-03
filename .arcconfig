@@ -3,7 +3,7 @@
   "project.name" : "eGazeciarz",
   "repository.callsign" : "EGT",
 
-  "base": "git:merge-base(origin/dev), arc:upstream, git:HEAD^",
+  "base": "arc:upstream, git:merge-base(origin/dev)",
   "arc.land.onto.default" : "dev",
   "arc.feature.start.default" : "origin/dev",
   "arc.land.update.default" : "rebase",
