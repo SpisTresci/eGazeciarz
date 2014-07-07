@@ -10,11 +10,11 @@
 
     <!-- CSS -->
     {% if is_dev %}
-        <link href="{% static "css/bootstrap-3.0.css"%}" rel="stylesheet" media="screen">
-        <link href="{% static "css/bootstrap-responsive-3.0.css"%}" rel="stylesheet" media="screen">
+        <link href="{% static "css/bootstrap-3.0.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/bootstrap-responsive-3.0.css" %}" rel="stylesheet" media="screen">
     {% else %}
-        <link href="{% static "css/bootstrap-min-3.0.css"%}" rel="stylesheet" media="screen">
-        <link href="{% static "css/bootstrap-responsive-min-3.0.css"%}" rel="stylesheet" media="screen">
+        <link href="{% static "css/bootstrap-min-3.0.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/bootstrap-responsive-min-3.0.css" %}" rel="stylesheet" media="screen">
     {% endif %}
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
     {% block css %}{% endblock css %}
