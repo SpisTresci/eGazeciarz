@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'p@-w#)25r$!j#ubevyd1)u0)++1%(bfuc$7r(jv$u9vc3k8)!7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -107,6 +107,7 @@ AUTHENTICATION_BACKENDS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.auth.context_processors.auth",
+    "egazeciarz.settings.context_processors.context_processor",
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
 )
@@ -135,3 +136,8 @@ STATIC_ROOT = os.path.join(
     "egazeciarz",
     "collected_statics",
 )
+
+settings_module = os.environ.get("DJANGO_SETTINGS_MODULE")
+IS_DEV = 'egazeciarz.settings.development' == settings_module
+IS_STAGING = 'egazeciarz.settings.staging' == settings_module
+IS_PROD = 'egazeciarz.settings.production' == settings_module
