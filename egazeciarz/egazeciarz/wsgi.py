@@ -8,11 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
-from django.core.handlers.wsgi import WSGIHandler
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "egazeciarz.settings")
 
-class WSGIEnvironment(WSGIHandler):
-    def __call__(self, environ, start_response):
-        os.environ['DJANGO_SETTINGS_MODULE'] = environ['DJANGO_SETTINGS_MODULE']
-        return super(WSGIEnvironment, self).__call__(environ, start_response)
-
-application = WSGIEnvironment()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
