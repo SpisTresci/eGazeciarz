@@ -8,21 +8,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">eGazeciarz</a>
+      <a class="navbar-brand" href="{% url "home" %}">eGazeciarz</a>
     </div>
 
     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/services/">Serwisy</a></li>
+        <li><a href="{% url "services:index" %}">Serwisy</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       {% if request.user.is_superuser %}
-        <li><a href="/admin/">Panel Admina</a></li>
+        <li><a href="{% url "admin:index" %}">Panel Admina</a></li>
       {% endif %}
       {% if user.is_authenticated %}
-        <li><a href="/accounts/logout/">Wyloguj</a></li>
+        <li><a href="{% url "allauth:account_logout" %}">Wyloguj</a></li>
       {% else %}
-        <li><a href="/accounts/login/">Zaloguj</a></li>
+        <li><a href="{% url "allauth:account_login" %}">Zaloguj</a></li>
       {% endif %}
       </ul>
     </div>

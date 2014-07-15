@@ -1,8 +1,14 @@
-<h1> {{ service.name }} </h1>
-<form action="{% url 'services:save' service.id %}" method="post">
-{% csrf_token %}
-    <label>
-        <input type="checkbox" name="status" {% if service.status %} checked {% endif %} value="{{ service.status }}"/>
-    </label>
-    <input type="submit" value="Zapisuj">
-</form>
+{% extends "base.html" %}
+
+{% block title %}eGazeciarz - Szczegóły serwisu{% endblock title %}
+
+{% block body %}
+    <h1> {{ service.name }} </h1>
+    <form action="{% url 'services:save' service.id %}" method="post">
+    {% csrf_token %}
+        <label>
+            <input type="checkbox" name="status" {% if service.status %} checked {% endif %} value="{{ service.status }}"/>
+        </label>
+        <input type="submit" value="Zapisuj">
+    </form>
+{% endblock body %}
