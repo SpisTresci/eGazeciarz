@@ -31,6 +31,9 @@
 
   </head>
   <body>
+    {% if not is_prod %}
+        <div class="ribbon {{ ENV }}"> DEBUG {% if DEBUG %}ON{% else %}OFF{% endif %} </br> {{ ENV|upper }}</div>
+    {% endif %}
     {% block navbar %} {% include "egazeciarz/navbar.html" %} {% endblock %}
     {% block body %}{% endblock body %}
   </body>

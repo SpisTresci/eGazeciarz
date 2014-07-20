@@ -139,5 +139,7 @@ STATIC_ROOT = os.path.join(
 
 settings_module = os.environ.get("DJANGO_SETTINGS_MODULE")
 IS_DEV = 'egazeciarz.settings.development' == settings_module
+IS_TEST = 'egazeciarz.settings.test' == settings_module
 IS_STAGING = 'egazeciarz.settings.staging' == settings_module
 IS_PROD = 'egazeciarz.settings.production' == settings_module
+ENV = settings_module.split('.')[-1]

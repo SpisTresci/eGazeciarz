@@ -1,0 +1,31 @@
+.ribbon{
+    overflow: hidden;
+    position: absolute;
+    left: -5.5em;
+    top: 2.5em;
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    z-index: 2000;
+    color: #fff;
+    display: block;
+    font: Arial, Helvetica;
+    margin: 0.05em 0;
+    padding: 0.5em 7.0em;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ribbon.development{
+    background-color:#24c52a;
+    border: 1px solid #24c52a;
+}
+
+.ribbon.test{
+    background-color:#003366 ;
+    border: 1px solid #003366;
+}
+
+.ribbon.staging{
+    background-color:#a00;
+    border: 1px solid #a00;
+}
