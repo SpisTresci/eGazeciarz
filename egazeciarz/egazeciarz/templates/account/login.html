@@ -1,0 +1,35 @@
+{% extends "socialaccount/base.html" %}
+
+{% load socialaccount %}
+{% load bootstrap %}
+
+{% block title %}eGazeciarz - Zaloguj{% endblock title %}
+
+{% block body %}
+
+<h1>Zaloguj</h1>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+  </ul>
+
+  <div class="login-or">lub</div>
+
+</div>
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form|bootstrap }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit">Zaloguj</button>
+    <a class="btn" href="{% url 'account_reset_password' %}">Nie pamiętasz hasła?</a>
+
+  </div>
+</form>
+
+{% endblock body %}

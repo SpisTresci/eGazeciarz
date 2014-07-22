@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'django_nose',
+    'bootstrapform',
 )
 
 MIDDLEWARE_CLASSES = (

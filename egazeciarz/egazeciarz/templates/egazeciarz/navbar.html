@@ -20,9 +20,9 @@
         <li><a href="{% url "admin:index" %}">Panel Admina</a></li>
       {% endif %}
       {% if user.is_authenticated %}
-        <li><a href="{% url "allauth:account_logout" %}">Wyloguj</a></li>
+        <li><a href="{% url "account_logout" %}">Wyloguj</a></li>
       {% else %}
-        <li><a href="{% url "allauth:account_login" %}">Zaloguj</a></li>
+        <li><a href="{% url "account_login" %}">Zaloguj</a></li>
       {% endif %}
       </ul>
     </div>

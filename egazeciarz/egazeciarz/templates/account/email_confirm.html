@@ -1,0 +1,30 @@
+{% extends "socialaccount/base.html" %}
+
+{% load account %}
+
+{% block title %}Potwierdź adres e-mail{% endblock title %}
+
+
+{% block body %}
+<h1>Potwierdź adres e-mail</h1>
+
+{% if confirmation %}
+
+{% user_display confirmation.email_address.user as user_display %}
+
+<p>Potwierdź, że adres <a href="mailto:{{email}}">{{ email }}</a> należy do użytkownika: {{ user_display }}.</p>
+
+<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+{% csrf_token %}
+    <button class="btn btn-primary" type="submit">Potwierdź</button>
+</form>
+
+{% else %}
+
+{% url 'account_email' as email_url %}
+
+<p>Link potwierdzający wygasł lub jest nieprawidłowy. <a href="{{ email_url}}">Dokonaj powtórnego potwierdzenia adresu e-mail.</a></p>
+
+{% endif %}
+
+{% endblock body %}
