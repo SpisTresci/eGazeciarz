@@ -1,35 +1,82 @@
-{% extends "socialaccount/base.html" %}
-
+{% extends "egazeciarz/base.html" %}
 {% load socialaccount %}
 {% load bootstrap %}
 
-{% block title %}eGazeciarz - Zaloguj{% endblock title %}
+{% block title %}eGazeciarz - Panel logowania{% endblock title %}
 
 {% block body %}
+    <div class="container">
 
-<h1>Zaloguj</h1>
 
-<div class="socialaccount_ballot">
-
+{% comment %}<div class="socialaccount_ballot">
+ <a class="btn btn-block btn-lg btn-social btn-facebook">
+    <i class="fa fa-facebook" ></i> Zaloguj przez Facebooka
+  </a>
   <ul class="socialaccount_providers">
-    <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+   <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
   </ul>
 
   <div class="login-or">lub</div>
 
-</div>
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
+</div>{% endcomment %}
+        <div class="row col-sm-6 col-md-4">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                    {% comment %}    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>{% endcomment %}
+                    {% comment %}
+                    <div class="col-sm-10 col-sm-2">
+                    {% endcomment %}
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Podaj adres email">
+                    {% comment %}  </div>{% endcomment %}
+                    </div>
+                    <div class="form-group">
+                    {% comment %}    <label for="inputPassword3" class="col-sm-2 control-label">Hasło</label>{% endcomment %}
+                    {% comment %}    <div class="col-sm-10 col-sm-2">{% endcomment %}
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Tu wpisz hasło">
+                    {% comment %}   </div>{% endcomment %}
+                    </div>
+                    <div class="form-group">
+                    {% comment %}    <div class="col-sm-2">{% endcomment %}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Pamiętaj mnie
+                            </label>
+                        </div>
+                        {% comment %}    </div>{% endcomment %}
+                    </div>
+                    <div class="form-actions">
+                    {% comment %}    <div class="col-sm-3">{% endcomment %}
+                        <button type="submit" class="btn btn-primary">Zaloguj</button>
+                        <a class="btn" href="{% url 'account_reset_password' %}">Nie pamiętasz hasła?</a>
+                    </div>
+                </form>
+        </div>
+{% comment %}<form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form|bootstrap }}
+{{ form|bootstrap }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
+
+
   <div class="form-actions">
     <button class="btn btn-primary" type="submit">Zaloguj</button>
     <a class="btn" href="{% url 'account_reset_password' %}">Nie pamiętasz hasła?</a>
 
   </div>
-</form>
+</form>{% endcomment %}
+        <div class="col-sm-6 col-md-2 text-center">lub</div>
 
+        <div class="row col-sm-6 col-md-4 center-block">
+                    <a class="btn btn-block btn-social btn-facebook">
+                        <i class="fa fa-facebook"></i> Zaloguj przez Facebooka
+                    </a>
+        </div>
+
+
+
+    </div>
 {% endblock body %}
+
+
+
