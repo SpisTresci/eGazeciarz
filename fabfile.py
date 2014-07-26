@@ -13,15 +13,14 @@ from fabric.utils import abort
 # globals
 env.project = "eGazeciarz"
 env.user = "egazeciarz"
-env.work_user = None
 
-env.path = "/home/%s" % env.user
-env.env_path = "%s/venv" % env.path
+env.user_path = "/home/%s" % env.user
+env.env_path = "%s/venv" % env.user_path
 env.repo_path = "%(path)s/%(project)s" % {
-    "path": env.path,
+    "path": env.user_path,
     "project": env.project,
 }
-env.work_path = "%s/egazeciarz" % env.repo_path
+
 
 env.prompt = True
 
@@ -35,13 +34,14 @@ def production():
     env.port = 1337
     env.hosts = [
         "%(user)s@beta.egazeciarz.pl:%(port)d" % {
-            "user": env.work_user,
+            "user": env.user,
             "port": env.port,
         }
     ]
     env.branch = "master"
-    env.work_path += "_%s" % env.environment
-    env.venv_path += "_%s" % env.environment
+    env.repo_path += "_%s" % env.environment
+    env.work_path = "%s/egazeciarz" % env.repo_path
+    env.env_path += "_%s" % env.environment
 
 
 @task
@@ -53,13 +53,14 @@ def staging():
     env.port = 1337
     env.hosts = [
         "%(user)s@staging.egazeciarz.pl:%(port)d" % {
-            "user": env.work_user,
+            "user": env.user,
             "port": env.port,
         }
     ]
     env.branch = "dev"
-    env.work_path += "_%s" % env.environment
-    env.venv_path += "_%s" % env.environment
+    env.repo_path += "_%s" % env.environment
+    env.work_path = "%s/egazeciarz" % env.repo_path
+    env.env_path += "_%s" % env.environment
 
 
 @task
@@ -107,7 +108,7 @@ def update_requirements():
             with prefix("source %s/bin/activate" % env.env_path):
                 run(
                     "pip install"
-                    "--requirement %s/requirements.txt" % env.repo_path
+                    " --requirement %s/requirements.txt" % env.repo_path
                 )
 
 
@@ -129,7 +130,7 @@ def collect_static():
             with prefix("source %s/bin/activate" % env.env_path):
                 run(
                     "./manage.py collectstatic"
-                    "--noinput"
+                    " --noinput"
                 )
 
 
@@ -151,7 +152,7 @@ def sync_db():
             with prefix("source %s/bin/activate" % env.env_path):
                 run(
                     "./manage.py syncdb"
-                    "--noinput"
+                    " --noinput"
                 )
 
 
