@@ -9,14 +9,14 @@ class ReceiverType(models.Model):
         return self.receiver
 
 
-class Hours(models.Model):
-    hours = models.TimeField(unique=True)
+class Hour(models.Model):
+    hour = models.TimeField(unique=True)
 
     def __unicode__(self):
-        return u'%s' % self.hours
+        return u'%s' % self.hour
 
 
-class Days(models.Model):
+class Day(models.Model):
     dow = models.CharField(max_length=10, unique=True)
 
     def __unicode__(self):
@@ -29,7 +29,7 @@ class UserProfile(models.Model):
         unique=True,
         related_name='profile',
     )
-    receiver_type = models.ManyToManyField(
+    receiver_types = models.ManyToManyField(
         ReceiverType,
         null=True,
         blank=True,
@@ -38,7 +38,7 @@ class UserProfile(models.Model):
     def display_receiver(self):
         return ','.join([
             ReceiverType.receiver
-            for ReceiverType in self.receiver_type.all()
+            for ReceiverType in self.receiver_types.all()
         ])
 
     display_receiver.short_description = 'Receiver types'
@@ -53,17 +53,17 @@ def create_profile(sender, instance, created, **kwargs):
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
 
-class Subscriptions(models.Model):
+class Subscription(models.Model):
     visable_name = models.CharField(max_length=50, unique=True)
-    reciper_name = models.CharField(max_length=50)
+    recipe_name = models.CharField(max_length=50)
     website_url = models.URLField()
 
     def __unicode__(self):
         return self.visable_name
 
 
-class UserSubs(models.Model):
-    subscriptions = models.ForeignKey(Subscriptions, to_field='visable_name')
+class UsersSubs(models.Model):
+    subscription = models.ForeignKey(Subscriptions, to_field='visable_name')
     user = models.ForeignKey(User, to_field='username')
 
     def __unicode__(self):
