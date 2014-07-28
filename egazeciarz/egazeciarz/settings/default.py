@@ -12,12 +12,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p@-w#)25r$!j#ubevyd1)u0)++1%(bfuc$7r(jv$u9vc3k8)!7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -25,7 +21,6 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -124,7 +119,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # temporary email backend for registration
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Template files
 TEMPLATE_DIRS = (
@@ -137,9 +132,8 @@ STATIC_ROOT = os.path.join(
     "collected_statics",
 )
 
-settings_module = os.environ.get("DJANGO_SETTINGS_MODULE")
-IS_DEV = 'egazeciarz.settings.development' == settings_module
-IS_TEST = 'egazeciarz.settings.test' == settings_module
-IS_STAGING = 'egazeciarz.settings.staging' == settings_module
-IS_PROD = 'egazeciarz.settings.production' == settings_module
-ENV = settings_module.split('.')[-1]
+try:
+    from local_settings import *
+except ImportError:
+    print 'Error: cannot import local_settings'
+    exit()
