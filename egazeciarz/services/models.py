@@ -63,7 +63,7 @@ class Subscription(models.Model):
 
 
 class UsersSubs(models.Model):
-    subscription = models.ForeignKey(Subscriptions, to_field='visable_name')
+    subscription = models.ForeignKey(Subscription, to_field='visable_name')
     user = models.ForeignKey(User, to_field='username')
 
     def __unicode__(self):
@@ -71,9 +71,9 @@ class UsersSubs(models.Model):
 
 
 class SubPattern(models.Model):
-    sub_id = models.ForeignKey(UserSubs)
-    day_id = models.ForeignKey(Days, to_field='dow')
-    hour_id = models.ForeignKey(Hours, to_field='hours')
+    sub_id = models.ForeignKey(UsersSubs)
+    day_id = models.ForeignKey(Day, to_field='dow')
+    hour_id = models.ForeignKey(Hour, to_field='hour')
 
     def __unicode__(self):
         return u"%s" % self.id
