@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'django_nose',
     'south',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,7 +74,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl'
 
 TIME_ZONE = 'UTC'
 

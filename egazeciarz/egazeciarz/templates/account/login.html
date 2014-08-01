@@ -1,0 +1,64 @@
+{% extends "egazeciarz/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}eGazeciarz - Panel logowania{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Panel logowania</h1>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="col-lg-5 col-xs-12 col-sm-5 col-md-6">
+                            {% load socialaccount %}
+                            {% include "socialaccount/snippets/login_extra.html" %}
+                            <a href="{% provider_login_url "facebook" method="js_sdk" %}" class="btn btn-block btn-social btn-facebook">
+                                <i class="fa fa-facebook"></i> Zaloguj przez Facebooka
+                            </a>
+                            <a class="btn btn-block btn-social btn-google-plus">
+                                <i class="fa fa-google-plus"></i> Zaloguj przez Google+
+                            </a>
+                            <a class="btn btn-block btn-social btn-twitter">
+                                <i class="fa fa-twitter"></i> Zaloguj przez Twitter
+                            </a>
+                </div>
+                <div class="col-lg-2 col-xs-12 col-sm-2 col-md-1 text-center">lub</div>
+                <div class="col-lg-5 col-xs-12 col-sm-5 col-md-5">
+                    <form class="form-horizontal" role="form" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.login|add_class:'form-control' }}
+                        </div>
+                        {% if form.errors.login %}
+                            <div class="alert alert-warning">
+                                <p>{{ form.errors.login.as_text }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            {{ form.password|add_class:'form-control' }}
+                        </div>
+                        {% if form.errors.password %}
+                            <div class="alert alert-warning">
+                                <p>{{ form.errors.password.as_text }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.remember }}
+                                    {{ form.remember.label }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Zaloguj</button>
+                            <a class="btn" href="{% url 'account_reset_password' %}">Nie pamiętasz hasła?</a>
+                            <a class="btn" href="{% url 'account_signup' %}">Załóż konto</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
