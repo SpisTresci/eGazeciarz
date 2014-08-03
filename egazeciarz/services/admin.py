@@ -2,14 +2,14 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 from django.contrib import admin
 from models import (
-    Days,
-    Hours,
+    Day,
+    Hour,
     ReceiverType,
     Service,
     SubPattern,
-    Subscriptions,
+    Subscription,
     UserProfile,
-    UserSubs,
+    UsersSubs,
 )
 
 
@@ -25,9 +25,9 @@ class UserProfileAdmin(UserAdmin):
 admin.site.unregister(get_user_model())
 admin.site.register(get_user_model(), UserProfileAdmin)
 admin.site.register(ReceiverType)
-admin.site.register(Hours)
-admin.site.register(Days)
-admin.site.register(Subscriptions)
-admin.site.register(UserSubs)
+admin.site.register(Hour)
+admin.site.register(Day)
+admin.site.register(Subscription)
+admin.site.register(UsersSubs)
 admin.site.register(SubPattern)
 admin.site.register(Service)
