@@ -1,15 +1,17 @@
-{% extends "base.html" %}
+{% extends "egazeciarz/base.html" %}
 
 {% block title %}eGazeciarz - Serwisy{% endblock title %}
 
 {% block body %}
-    {% if services_list %}
-        <ul>
-            {% for service in services_list %}
-                <li><a href="{% url 'services:detail' service.id %}">  {{ service.name }} </a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>Prace trwają. Jeszcze nie podłączyliśmy żadnych serwisów.</h3>
-    {% endif %}
+    <div class="container">
+        {% if services_list %}
+            <ul>
+                {% for service in services_list %}
+                    <li><a href="{% url 'services:detail' service.id %}">  {{ service.name }} </a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h4>Prace trwają. Jeszcze nie podłączyliśmy żadnych serwisów.</h4>
+        {% endif %}
+    </div>
 {% endblock body %}

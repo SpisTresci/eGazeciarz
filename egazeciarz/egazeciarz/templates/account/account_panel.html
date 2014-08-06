@@ -1,0 +1,67 @@
+{% extends "egazeciarz/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}eGazeciarz - Panel użytkownika{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Twoje konto</h1>
+        </div>
+        <div class="container">
+            <h4>Dodaj adres wysyłki na czytnik/telefon:</h4>
+            <div class="input-group">
+                <input type="text" class="form-control">
+                <form class="form-horizontal" role="form">
+                </form>
+                <span class="input-group-addon">@</span>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">wybierz<span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li>kindle.com</li>
+                        <li>free.kindle.com</li>
+                        <li class="form-control">inny</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Anuluj</button>
+                <button type="button" class="btn btn-default">Zapisz zmiany</button>
+            </div>
+        </div>
+        <div class="container">
+            <h4>Zmiana hasła:</h4>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <input type="password" class="form-control" id="inputPassword1" placeholder="Dotychczasowe hasło">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Nowe hasło">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Powtórz nowe hasło">
+                </div>
+            </form>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Anuluj</button>
+                <button type="button" class="btn btn-default">Zapisz zmiany</button>
+            </div>
+        </div>
+        <div class="container">
+            <h4>Zmiana adresu e-mail:</h4>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Wpisz nowy adres email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Twoje tajne hasło">
+                </div>
+            </form>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Anuluj</button>
+                <button type="button" class="btn btn-default">Zapisz zmiany</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
