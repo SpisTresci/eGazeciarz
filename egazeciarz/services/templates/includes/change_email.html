@@ -1,0 +1,6 @@
+    <h2>Zmiana email</h2>
+    <form action="{% url 'services:change_email' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zapisz zmiany</button>
+    </form>

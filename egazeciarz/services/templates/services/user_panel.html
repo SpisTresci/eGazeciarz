@@ -1,20 +1,15 @@
 {% extends 'egazeciarz/base.html' %}
+{% load static %}
 
 {% block title %}Panel użytkownika{% endblock title %}
 
+{% block js %}
+<script src="{% static "js/user_panel.js" %}"></script>
+{% endblock js %}
+
 {% block body %}
     <h2>Zmiana hasła</h2>
-    <form action="{% url 'services:user_panel' %}" method="post">
-        {% csrf_token %}
-        {{ password_change_form.as_p }}
-        <button type="submit">Zapisz zmiany</button>
-    </form>
+    {% include 'includes/change_password.html' with form=password_change_form %}
 
-    
-    <h2>Zmiana email</h2>
-    <form action="{% url 'services:user_panel' %}" method="post">
-        {% csrf_token %}
-        {{ change_email_form.as_p }}
-        <button type="submit">Zapisz zmiany</button>
-    </form>
+    {% include 'includes/change_email.html' with form=change_email_form %}
 {% endblock body %}
