@@ -25,6 +25,7 @@ class DetailView(generic.DetailView):
     template_name = 'services/detail.html'
     model = Service
 
+
 # http://stackoverflow.com/questions/15497693/django-can-class-based-views-accept-two-forms-at-a-time
 class UserPanelView(generic.TemplateView):
     template_name = 'services/user_panel.html'
@@ -42,7 +43,6 @@ class UserPanelView(generic.TemplateView):
         ctx.setdefault('password_change_form', self.form_class(user=user, prefix='password_change'))
         ctx.setdefault('change_email_form', self.change_email_form_class(self.request.POST, prefix='change_email'))
         return self.render_to_response(self.get_context_data(**ctx))
-
 
     def get_context_data(self, **kwargs):
         ctx = super(UserPanelView, self).get_context_data(**kwargs)
@@ -72,17 +72,18 @@ class ChangePasswordView(generic.UpdateView):
 
     def form_invalid(self, form):
         return self.response_class(
-            request = self.request,
-            template = 'includes/change_password.html',
-            context = self.get_context_data(form=form),
+            request=self.request,
+            template='includes/change_password.html',
+            context=self.get_context_data(form=form),
             **{'content_type': self.content_type}
         )
 
     def form_valid(self, form):
+        form.save()
         return self.response_class(
-            request = self.request,
-            template = 'includes/change_password.html',
-            context = self.get_context_data(success=True),
+            request=self.request,
+            template='includes/change_password.html',
+            context=self.get_context_data(success=True),
             **{'content_type': self.content_type}
         )
 
