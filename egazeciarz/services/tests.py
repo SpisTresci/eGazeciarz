@@ -1,11 +1,11 @@
 from django.test import TestCase
-#from django.test.utils import override_settings
+# from django.test.utils import override_settings
 from django.contrib.auth import SESSION_KEY
 
 
-#@override_settings(
-#    PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',),
-#)
+# @override_settings(
+#     PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',),
+# )
 class ChangePasswordTestCase(TestCase):
     # ./manage.py dumpdata --indent 3 auth.user > ./services/fixtures/users.json
     fixtures = ['users.json']

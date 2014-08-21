@@ -40,15 +40,27 @@ class UserPanelView(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         ctx = {}
         user = self.request.user
-        ctx.setdefault('password_change_form', self.form_class(user=user, prefix='password_change'))
-        ctx.setdefault('change_email_form', self.change_email_form_class(self.request.POST, prefix='change_email'))
+        ctx.setdefault('password_change_form',
+                       self.form_class(user=user, prefix='password_change'),
+                       )
+        ctx.setdefault('change_email_form',
+                       self.change_email_form_class(self.request.POST,
+                                                    prefix='change_email',
+                                                    ),
+                       )
         return self.render_to_response(self.get_context_data(**ctx))
 
     def get_context_data(self, **kwargs):
         ctx = super(UserPanelView, self).get_context_data(**kwargs)
         user = self.request.user
-        ctx.setdefault('password_change_form', self.form_class(user=user, prefix='password_change'))
-        ctx.setdefault('change_email_form', self.change_email_form_class(self.request.POST, prefix='change_email'))
+        ctx.setdefault('password_change_form',
+                       self.form_class(user=user, prefix='password_change')
+                       )
+        ctx.setdefault('change_email_form',
+                       self.change_email_form_class(self.request.POST,
+                                                    prefix='change_email',
+                                                    ),
+                       )
         return ctx
 
 
