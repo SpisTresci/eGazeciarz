@@ -19,6 +19,7 @@
       {% if request.user.is_superuser %}
         <li><a href="{% url "admin:index" %}">Panel Admina</a></li>
       {% endif %}
+        <li><a href="{% url "profile" %}">Mój profil</a></li>
       {% if user.is_authenticated %}
         <li><a href="{% url "account_logout" %}">Wyloguj</a></li>
       {% else %}
