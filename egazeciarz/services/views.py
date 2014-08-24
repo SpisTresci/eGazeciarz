@@ -111,6 +111,22 @@ class ChangeEmailView(generic.UpdateView):
     def get_object(self):
         return self.request.user
 
+    def form_invalid(self, form):
+        return self.response_class(
+            request=self.request,
+            template='includes/change_email.html',
+            context=self.get_context_data(form=form),
+            **{'content_type': self.content_type}
+        )
+
+    def form_valid(self, form):
+        form.save()
+        return self.response_class(
+            request=self.request,
+            template='includes/change_email.html',
+            context=self.get_context_data(success=True),
+            **{'content_type': self.content_type}
+        )
 
 def save(request, service_id):
     service = get_object_or_404(Service, id=service_id)
