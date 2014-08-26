@@ -6,11 +6,13 @@ urlpatterns = patterns(
     '',
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^user-panel/$', views.UserPanelView.as_view(), name='user_panel'),
-    url(r'^password-change/$',
+    url(
+        r'^password-change/$',
         views.ChangePasswordView.as_view(),
         name='change_password',
         ),
-    url(r'^email-change/$',
+    url(
+        r'^email-change/$',
         views.ChangeEmailView.as_view(),
         name='change_email',
         ),
