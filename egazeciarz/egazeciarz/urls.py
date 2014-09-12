@@ -13,6 +13,11 @@ urlpatterns = patterns(
         TemplateView.as_view(template_name="egazeciarz/index.html"),
         name="home",
     ),
+    url(
+        r'^rank/',
+        TemplateView.as_view(template_name="rank.html"),
+        name="rank",
+    ),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^services/', include('services.urls', namespace='services')),
