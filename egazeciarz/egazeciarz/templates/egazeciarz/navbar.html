@@ -14,7 +14,7 @@
     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="{% url "services:index" %}">Serwisy</a></li>
-        <li><a href="{% url "rank" %}">Ranking</a></li>
+        <li><a href="{% url "rank:index" %}">Ranking</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       {% if request.user.is_superuser %}

@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     # our apps
     'egazeciarz',
     'services',
+    'rank',
     # else
     'allauth',
     'allauth.account',
