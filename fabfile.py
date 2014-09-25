@@ -16,6 +16,7 @@ from logging import (
 )
 from fabric.contrib import console
 from fabric.utils import abort
+from textwrap import dedent
 from string import join
 import sys
 from datetime import datetime
@@ -103,7 +104,6 @@ class IOLogger(IOBase):
         sys.stderr = sys.__stderr__
         sys.stdin = sys.__stdin__
 
-
 # globals
 env.project = "eGazeciarz"
 env.user = "egazeciarz"
@@ -118,25 +118,53 @@ env.repo_path = "%(path)s/%(project)s" % {
 env.prompt = True
 env.logger = None
 
+env_vars = {
+    'test': {
+        'subdomain': 'test',
+        'branch': 'dev',
+        'port': 1337,
+        'log_compherence': 22,
+    },
+    'staging': {
+        'subdomain': 'staging',
+        'branch': 'dev',
+        'port': 1337,
+        'log_compherence': 19,
+    },
+    'production': {
+        'subdomain': 'beta',
+        'branch': 'master',
+        'port': 1337,
+        'log_compherence': 21,
+    },
+}
+
+
+def _set_vars(environment):
+    env.environment = environment
+    subdomain = env_vars[environment]['subdomain']
+    port = env_vars[environment]['port']
+
+    env.hosts = [
+        "%s@%s.egazeciarz.pl:%d" % {
+            env.user,
+            subdomain,
+            port,
+        }
+    ]
+    env.branch = env_vars[environment]['branch']
+    env.repo_path += "_%s" % env.environment
+    env.work_path = "%s/egazeciarz" % env.repo_path
+    env.env_path += "_%s" % env.environment
+    env.log_compherence = env_vars[environment]['log_comphernce']
+
 
 @task
 def production():
     """
     Select production environment
     """
-    env.environment = "production"
-    env.port = 1337
-    env.hosts = [
-        "%(user)s@beta.egazeciarz.pl:%(port)d" % {
-            "user": env.user,
-            "port": env.port,
-        }
-    ]
-    env.branch = "master"
-    env.repo_path += "_%s" % env.environment
-    env.work_path = "%s/egazeciarz" % env.repo_path
-    env.env_path += "_%s" % env.environment
-    env.log_compherence = 21
+    _set_vars('production')
 
 
 @task
@@ -144,19 +172,15 @@ def staging():
     """
     Select staging environment
     """
-    env.environment = "staging"
-    env.port = 1337
-    env.hosts = [
-        "%(user)s@staging.egazeciarz.pl:%(port)d" % {
-            "user": env.user,
-            "port": env.port,
-        }
-    ]
-    env.branch = "dev"
-    env.repo_path += "_%s" % env.environment
-    env.work_path = "%s/egazeciarz" % env.repo_path
-    env.env_path += "_%s" % env.environment
-    env.log_compherence = 19
+    _set_vars('staging')
+
+
+@task
+def test():
+    """
+    Select test environment
+    """
+    _set_vars('test')
 
 
 @task
@@ -294,7 +318,8 @@ def deploy():
         "environment",
         provided_by=[
             production,
-            staging
+            staging,
+            test,
         ]
     )
 
@@ -324,16 +349,17 @@ def usage():
     """
     Print usage examples
     """
-    print(
+    dedent(
         """
-Usage examples:
-
-Staging deployment:
-       $ fab [noinput] staging deploy
-
-Production deployment:
-       $ fab [noinput] production deploy
-""")
+        Test deployment:
+            $ fab [noinput] test deploy
+        Staging deployment:
+            $ fab [noinput] staging deploy
+        Production deployment:
+            $ fab [noinput] production deploy
+        Usage examples:
+        """
+    )
 
 
 @register
