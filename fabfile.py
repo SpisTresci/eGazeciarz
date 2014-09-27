@@ -17,7 +17,6 @@ from logging import (
 from fabric.contrib import console
 from fabric.utils import abort
 from textwrap import dedent
-from string import join
 import sys
 from datetime import datetime
 from atexit import register
@@ -107,6 +106,8 @@ class IOLogger(IOBase):
 # globals
 env.project = "eGazeciarz"
 env.user = "egazeciarz"
+env.callsign = 'EGT'
+env.repo_browser = "https://dev.spistresci.pl/diffusion/%s/" % env.callsign
 
 env.user_path = "/home/%s" % env.user
 env.env_path = "%s/venv" % env.user_path
@@ -123,19 +124,19 @@ env_vars = {
         'subdomain': 'test',
         'branch': 'dev',
         'port': 1337,
-        'log_compherence': 22,
+        'log_compherence': 24,
     },
     'staging': {
         'subdomain': 'staging',
         'branch': 'dev',
         'port': 1337,
-        'log_compherence': 19,
+        'log_compherence': 25,
     },
     'production': {
         'subdomain': 'beta',
         'branch': 'master',
         'port': 1337,
-        'log_compherence': 21,
+        'log_compherence': 26,
     },
 }
 
@@ -146,17 +147,17 @@ def _set_vars(environment):
     port = env_vars[environment]['port']
 
     env.hosts = [
-        "%s@%s.egazeciarz.pl:%d" % {
+        "%s@%s.egazeciarz.pl:%d" % (
             env.user,
             subdomain,
             port,
-        }
+        )
     ]
     env.branch = env_vars[environment]['branch']
     env.repo_path += "_%s" % env.environment
     env.work_path = "%s/egazeciarz" % env.repo_path
     env.env_path += "_%s" % env.environment
-    env.log_compherence = env_vars[environment]['log_comphernce']
+    env.log_compherence = env_vars[environment]['log_compherence']
 
 
 @task
@@ -349,17 +350,18 @@ def usage():
     """
     Print usage examples
     """
-    dedent(
+
+    print(dedent(
         """
+        Usage examples:
         Test deployment:
             $ fab [noinput] test deploy
         Staging deployment:
             $ fab [noinput] staging deploy
         Production deployment:
             $ fab [noinput] production deploy
-        Usage examples:
         """
-    )
+    ))
 
 
 @register
@@ -375,18 +377,33 @@ def publish_log():
     phabricator.update_interfaces()
     deployer = phabricator.user.whoami()
 
-    paste_title = "fab %(arguments)s # %(user)s at %(date)s" % {
-        "arguments": join(sys.argv[1:]),
+
+    info_dict = {
+        "arguments": " ".join(sys.argv[1:]),
         "user": deployer.userName,
-        "date": datetime.now().strftime('%Y-%m-%d'),
+        "date": datetime.now().strftime('%Y-%m-%d %H:%M'),
     }
+
+    paste_title = "fab %(arguments)s # %(user)s at %(date)s" % info_dict
 
     paste = phabricator.paste.create(
         content=log_output,
         title=paste_title,
     )
 
+    info_dict.update({
+        "paste_id": paste.id,
+        "branch": env.branch,
+        "branch_repo_url": "%(repo_browser_url)shistory/%(branch)s/" % {
+            "repo_browser_url": env.repo_browser,
+            "branch": env.branch,
+        }
+    })
+
+    msg = "P%(paste_id)d `fab %(arguments)s` # @%(user)s at %(date)s " \
+          "from branch [%(branch)s](%(branch_repo_url)s) " % info_dict
+
     phabricator.conpherence.updatethread(
         id=env.log_compherence,
-        message='P' + str(paste.id),
+        message=msg,
     )
