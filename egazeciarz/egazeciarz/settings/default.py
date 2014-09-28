@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
+
+ADMINS = (
+    ('Patryk Perduta', 'pperduta@spistresci.pl'),
+    ('Krzysztof Szumny', 'kszumny@spistresci.pl'),
+    ('Artur Stachecki', 'arturstachecki@gmail.com'),
+    ('Mateusz Smolik', 'dyzajash@gmail.com'),
+)
+
+settings_module = os.environ.get("DJANGO_SETTINGS_MODULE")
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -122,10 +133,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# temporary email backend for registration
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 # Template files
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(BASE_DIR), "static", "templates")
@@ -136,6 +143,20 @@ STATIC_ROOT = os.path.join(
     "egazeciarz",
     "collected_statics",
 )
+
+IS_DEV = 'egazeciarz.settings.development' == settings_module
+IS_TEST = 'egazeciarz.settings.test' == settings_module
+IS_STAGING = 'egazeciarz.settings.staging' == settings_module
+IS_PROD = 'egazeciarz.settings.production' == settings_module
+
+ENV = settings_module.split('.')[-1]
+
+
+if IS_STAGING or IS_PROD:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 try:
     from local_settings import *
