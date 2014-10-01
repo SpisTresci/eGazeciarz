@@ -8,6 +8,7 @@
             <h1>Twoje konto</h1>
         </div>
         <div class="container">
+
             <h4>Dodaj adres wysyłki na czytnik/telefon:</h4>
             <div class="form-group">
                 <input type="email" class="form-control" id="inputEmail2" placeholder="Adres e-mail wysyłki">
@@ -17,32 +18,58 @@
             </div>
         </div>
         <div class="container">
+            {% include "includes/change_password.html" %}
+            {% comment %}
             <h4>Zmiana hasła:</h4>
-            <div class="form-group">
-                <input type="password" class="form-control" id="inputPassword1" placeholder="Dotychczasowe hasło">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Nowe hasło">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Powtórz nowe hasło">
-            </div>
-            <div class="btn-group pull-right">
-                <button type="button" class="btn btn-primary">Zapisz zmiany</button>
-            </div>
+            {% if not success %}
+                <form id="change_password_form" action="{% url 'services:change_password' %}" method="post">
+                    {% csrf_token %}
+                    {{ password_change_form.non_field_errors }}
+                    <div class="form-group">
+                        {{ password_change_form.old_password|attr:"placeholder:Dotychczasowe hasło"|add_class:"form-control" }}
+                        {{ password_change_form.old_password.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ password_change_form.new_password1|attr:"placeholder:Nowe hasło"|add_class:"form-control" }}
+                        {{ password_change_form.new_password1.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ password_change_form.new_password2|attr:"placeholder:Powtórz nowe hasło"|add_class:"form-control" }}
+                        {{ password_change_form.new_password2.errors }}
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                    </div>
+                </form>
+            {% else %}
+                <p>Hasło zmienione pomyslnie</p>
+            {% endif %}
+            {% endcomment %}
         </div>
         <div class="container">
+            {% include "includes/change_email.html" %}
+            {% comment %}
             <h4>Zmiana adresu e-mail:</h4>
-            <div class="form-group">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Wpisz nowy adres email">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Twoje tajne hasło">
-            </div>
-            <div class="btn-group pull-right">
-                <button type="button" class="btn btn-primary">Zapisz zmiany</button>
-            </div>
+            <form action="{% url "services:change_email" %}" method="post">
+                    {% csrf_token %}
+                    {{ change_email_form.non_field_errors }}
+                    <div class="form-group">
+                        {{ change_email_form.email|add_class:"form-control"|attr:"placeholder:Wpisz nowy adres email" }}
+                        {{ change_email_form.email.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ change_email_form.password|add_class:"form-control"|attr:"placeholder:Twoje tajne hasło" }}
+                        {{ change_email_form.password.errors }}
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                    </div>
+            </form>
+            {% endcomment %}
         </div>
     </div>
 
 {% endblock body %}
+{% block js %}
+<script src="{% static "js/user_panel.js" %}"></script>
+{% endblock js %}

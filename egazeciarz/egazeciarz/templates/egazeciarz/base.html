@@ -32,7 +32,6 @@
       <script src="{% static "js/jquery-min-1.10.2.js" %}"></script>
       <script src="{% static "js/bootstrap.min.js" %}" ></script>
     {% endif %}
-    {% block js %}{% endblock js %}
     {% endblock head %}
   </head>
   <body>
@@ -41,5 +40,6 @@
     {% endif %}
     {% block navbar %} {% include "egazeciarz/navbar.html" %} {% endblock %}
     {% block body %}{% endblock body %}
+    {% block js %}{% endblock js %}
   </body>
 </html>

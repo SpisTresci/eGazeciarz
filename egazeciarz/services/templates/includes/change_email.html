@@ -1,8 +1,17 @@
-    <form action="{% url 'services:change_email' %}" method="post">
-        <div id="ajaxwrapper">
+{% load widget_tweaks %}
+    <h4>Zmiana adresu e-mail:</h4>
+    <form action="{% url "services:change_email" %}" method="post">
             {% csrf_token %}
             {{ form.non_field_errors }}
-            {{ form.as_p }}
-            <button type="submit">Zapisz zmiany</button>
-        </div>
+            <div class="form-group">
+                {{ form.email|add_class:"form-control"|attr:"placeholder:Wpisz nowy adres email" }}
+                {{ form.email.errors }}
+            </div>
+            <div class="form-group">
+                {{ form.password|add_class:"form-control"|attr:"placeholder:Twoje tajne hasło" }}
+                {{ form.password.errors }}
+            </div>
+            <div class="btn-group pull-right">
+                <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            </div>
     </form>

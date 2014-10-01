@@ -15,7 +15,7 @@ urlpatterns = patterns(
     ),
     url(
         r'^profile/',
-        TemplateView.as_view(template_name="profile/account_panel.html"),
+        'services.views.user_panel_view',
         name="profile",
     ),
     url(r'^admin/', include(admin.site.urls)),
