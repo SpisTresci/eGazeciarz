@@ -274,6 +274,7 @@ def sync_db():
                 run(
                     "./manage.py syncdb"
                     " --noinput"
+                    "--migrate"
                 )
 
 
@@ -310,6 +311,38 @@ def restart_apache():
         sudo("service apache2 restart")
 
 
+def clear_project_directory():
+    """
+    Remove non-project files(not contained in repo) from project directory
+    """
+    check_prompt = (
+        not env.prompt or
+        console.confirm(
+            "Clear project directory from non-project files?",
+            default=False,
+        )
+    )
+
+    if check_prompt:
+        run("git clean -xfd")
+
+
+def overwrite_local_settings_py():
+    """
+    Overwrite egazeciarz/egazeciarz/settings/local_settings.py with ~/.[env]_local_settings.py
+    """
+    check_prompt = (
+        not env.prompt or
+        console.confirm(
+            "Overwrite local_settings.py?",
+            default=False,
+        )
+    )
+
+    if check_prompt:
+        run("cat $HOME/.%s_local_settings.py >"+
+            " egazeciarz/egazeciarz/settings/local_settings.py" % env.environment)
+
 @task
 def deploy():
     """
@@ -337,7 +370,9 @@ def deploy():
     if check_prompt:
         abort("Production deployment aborted.")
 
+    clear_project_directory()
     pull_changes()
+    overwrite_local_settings_py()
     update_requirements()
     collect_static()
     sync_db()
