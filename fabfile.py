@@ -238,7 +238,7 @@ def collect_static():
     Collect static files and copy them to collect_static
     """
 
-    check_promt = (
+    check_prompt = (
         not env.prompt or
         console.confirm(
             "Collect static files and copy them to collect_static?",
@@ -246,7 +246,7 @@ def collect_static():
         )
     )
 
-    if check_promt:
+    if check_prompt:
         with cd("%s" % env.work_path):
             with prefix("source %s/bin/activate" % env.env_path):
                 run(
