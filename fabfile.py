@@ -340,8 +340,9 @@ def overwrite_local_settings_py():
     )
 
     if check_prompt:
-        run("cat $HOME/.%s_local_settings.py >"+
+        run("cat $HOME/.%s_local_settings.py >"
             " egazeciarz/egazeciarz/settings/local_settings.py" % env.environment)
+
 
 @task
 def deploy():
@@ -411,7 +412,6 @@ def publish_log():
     phabricator = Phabricator()
     phabricator.update_interfaces()
     deployer = phabricator.user.whoami()
-
 
     info_dict = {
         "arguments": " ".join(sys.argv[1:]),
