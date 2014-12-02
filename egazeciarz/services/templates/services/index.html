@@ -44,7 +44,8 @@
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-7 bhoechie-tab">
                         {% for section in sections %}
                             <div class="bhoechie-tab-content{% if forloop.first %} active{% endif %}">
-                                {% include "services/services_thumbnails_view.html" %}
+{#                                {% include "services/services_thumbnails_view.html" %}#}
+                                {% include "services/service_page.html" %}
                             </div>
                         {% endfor %}
                     </div>

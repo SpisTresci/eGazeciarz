@@ -74,3 +74,20 @@
     min-height: 150px;
     max-height: 300px;
 }
+
+
+.week label:first-child {
+    margin-left: 10px;
+}
+
+.week .btn-group {
+    /*float: right;*/
+    padding: 30px 0 30px 0;
+}
+
+.week select {
+    max-width: 120px;
+    min-height: 250px;
+}
+
+
