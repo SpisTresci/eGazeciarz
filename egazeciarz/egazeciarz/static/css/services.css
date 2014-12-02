@@ -75,19 +75,32 @@
     max-height: 300px;
 }
 
-
-.week label:first-child {
-    margin-left: 10px;
+.row .page-header {
+    padding-left: 10px;
 }
 
-.week .btn-group {
-    /*float: right;*/
-    padding: 30px 0 30px 0;
+.week {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.week .day_column_container{
+    float: left;
+    padding: 10px;
+}
+
+form .btn-group {
+    float: right;
+    margin: 30px auto;
 }
 
 .week select {
     max-width: 120px;
-    min-height: 250px;
+    min-height: 200px;
+}
+
+.clearfix{
+    clear:  both;
 }
 
 

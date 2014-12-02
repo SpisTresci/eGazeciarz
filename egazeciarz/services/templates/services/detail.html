@@ -1,14 +1,7 @@
-{% extends "base.html" %}
+{% extends 'services/service_base.html' %}
 
-{% block title %}eGazeciarz - Szczegóły serwisu{% endblock title %}
+{% block title %}eGazeciarz - {{ name }}{% endblock title %}
 
-{% block body %}
-    <h1> {{ service.name }} </h1>
-    <form action="{% url 'services:save' service.id %}" method="post">
-    {% csrf_token %}
-        <label>
-            <input type="checkbox" name="status" {% if service.status %} checked {% endif %} value="{{ service.status }}"/>
-        </label>
-        <input type="submit" value="Zapisuj">
-    </form>
-{% endblock body %}
+{% block inner_content %}
+    {% include "services/service_page_view.html" %}
+{% endblock inner_content %}
