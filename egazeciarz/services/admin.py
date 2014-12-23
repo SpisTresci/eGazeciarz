@@ -1,16 +1,9 @@
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth import get_user_model
 from django.contrib import admin
-from models import (
-    Day,
-    Hour,
-    ReceiverType,
-    Service,
-    SubPattern,
-    Subscription,
-    UserProfile,
-    UsersSubs,
-)
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
+
+from egazeciarz.models import ReceiverType, UserProfile
+from models import Service, SubPattern, UsersSubs
 
 
 class UserProfileInline(admin.StackedInline):
@@ -25,9 +18,6 @@ class UserProfileAdmin(UserAdmin):
 admin.site.unregister(get_user_model())
 admin.site.register(get_user_model(), UserProfileAdmin)
 admin.site.register(ReceiverType)
-admin.site.register(Hour)
-admin.site.register(Day)
-admin.site.register(Subscription)
 admin.site.register(UsersSubs)
 admin.site.register(SubPattern)
 admin.site.register(Service)
