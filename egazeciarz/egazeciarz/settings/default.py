@@ -20,6 +20,9 @@ ADMINS = (
     ('Mateusz Smolik', 'dyzajash@gmail.com'),
 )
 
+USER = ''
+PASSWORD = ''
+
 settings_module = os.environ.get("DJANGO_SETTINGS_MODULE")
 
 
