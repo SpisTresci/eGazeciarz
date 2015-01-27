@@ -1,0 +1,29 @@
+{% load zip_tuple %}
+<!-- {{ section.name }}/{{ name }} -->
+<div class="row" >
+    <div class="page-header">
+        <h1>{{ name }}</h1>
+        <h4><small>{{ description }}</small></h4>
+    </div>
+
+    <form action="{% url 'services:save' id %}" method="post">
+        <div class="week">
+            {% for day_number, day_name in days_of_the_week %}
+                <div class="day_column_container">
+                    <h5> {{ day_name }}</h5>
+                    <select multiple id="day{{ day_number }}" class="form-control" >
+                        {% for i in hours_per_day %}
+                            <option {% if day_number|zip_tuple:i in subscribed %}selected{% endif %}>{{ i }}:00</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default">Wyślij teraz</button>
+            <button type="button" class="btn btn-default">Pobierz teraz</button>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
+        </div>
+    </form>
+</div>

@@ -2,7 +2,7 @@
 <div class="row" >
     {% for service in section.services %}
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-            <a href="#" class="thumbnail text-center">
+            <a href="{% url 'services:detail' service.id %}" class="thumbnail text-center">
                 <div class="cover" style="background-image:url('{{ service.cover }}')"></div>
                 <div class="service-title" title="{{ service.title }}">{{ service.title }}</div>
             </a>

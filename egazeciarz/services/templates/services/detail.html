@@ -1,14 +1,15 @@
-{% extends "base.html" %}
+{% extends 'services/service_base.html' %}
 
-{% block title %}eGazeciarz - Szczegóły serwisu{% endblock title %}
+{% block title %}eGazeciarz - {{ name }}{% endblock title %}
 
-{% block body %}
-    <h1> {{ service.name }} </h1>
-    <form action="{% url 'services:save' service.id %}" method="post">
-    {% csrf_token %}
-        <label>
-            <input type="checkbox" name="status" {% if service.status %} checked {% endif %} value="{{ service.status }}"/>
-        </label>
-        <input type="submit" value="Zapisuj">
-    </form>
-{% endblock body %}
+{% block section_navigation %}
+    {% for section in sections %}
+        <a href="{% url 'services:save' id %}" class="list-group-item text-center{% if section.id == section_id %} active{% endif %}">{{section.name}}</a>
+    {% endfor %}
+{% endblock section_navigation %}
+
+{% block inner_content %}
+    <div class="bhoechie-tab-content active">
+        {% include "services/service_page_view.html" %}
+    </div>
+{% endblock inner_content %}
